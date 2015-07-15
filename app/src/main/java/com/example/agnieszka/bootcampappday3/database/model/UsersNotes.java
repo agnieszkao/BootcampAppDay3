@@ -12,6 +12,15 @@ public class UsersNotes extends Model {
     @Column(name = "note")
     private Note mNote;
 
+    public UsersNotes() {
+
+    }
+
+    public UsersNotes(Model user, Model note) {
+        mUser = (User) user;
+        mNote = (Note) note;
+    }
+
     public User getUser() {
         return mUser;
     }

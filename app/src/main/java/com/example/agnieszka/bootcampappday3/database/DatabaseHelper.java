@@ -2,6 +2,7 @@ package com.example.agnieszka.bootcampappday3.database;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
+import com.activeandroid.query.Select;
 import com.example.agnieszka.bootcampappday3.database.model.Note;
 import com.example.agnieszka.bootcampappday3.database.model.User;
 import com.example.agnieszka.bootcampappday3.database.model.UsersNotes;
@@ -23,64 +24,65 @@ public class DatabaseHelper {
         return databaseHelper;
     }
 
-    public boolean save(Note note) {
+    public boolean saveNote(Note note) {
         return note.save() > -1;
     }
 
-    public boolean save(List<Model> notes) {
+    public boolean saveNotes(List<Model> notes) {
         try {
             ActiveAndroid.beginTransaction();
             for (Model note : notes) {
-                if (!save((Note)note)) {
+                if (!saveNote((Note) note)) {
                     return false;
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             ActiveAndroid.endTransaction();
         }
         return true;
     }
 
-    public boolean save(User user) {
+    public boolean saveUser(User user) {
         return user.save() > -1;
     }
 
-    public boolean saveUser(List<Model> users) {
+    public boolean saveUsers(List<Model> users) {
         try {
             ActiveAndroid.beginTransaction();
             for (Model user : users) {
-                if (!save((User)user)) {
+                if (!saveUser((User) user)) {
                     return false;
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             ActiveAndroid.endTransaction();
         }
         return true;
     }
 
-    public boolean save(UsersNotes usersNotes) {
-        return usersNotes.save() > -1;
+    public boolean saveUsersNote(UsersNotes usersNote) {
+        return usersNote.save() > -1;
     }
 
-    public boolean saveUsersNotes(List<Model> usersNotes) {
+    public boolean saveUsersNotes(List<UsersNotes> usersNotes) {
         try {
             ActiveAndroid.beginTransaction();
-            for (Model usersNote : usersNotes) {
-                if (!save((UsersNotes)usersNotes)) {
+            for (UsersNotes usersNote : usersNotes) {
+                if (!saveUsersNote(usersNote)) {
                     return false;
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             ActiveAndroid.endTransaction();
         }
         return true;
+    }
+
+    public List<User> getAllUsers() {
+        return new Select().from(User.class).execute();
     }
 
 }

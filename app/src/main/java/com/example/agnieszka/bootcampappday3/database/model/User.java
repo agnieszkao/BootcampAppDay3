@@ -23,10 +23,10 @@ public class User extends Model {
     public List<Note> getNotes() {
         List<UsersNotes> userNotes = getUserNotes();
         List<Note> notes = new ArrayList<>();
-        for(UsersNotes usersNote : userNotes) {
+        for (UsersNotes usersNote : userNotes) {
             notes.add(usersNote.getNote());
         }
-        return null;
+        return notes;
     }
 
     public String getName() {
