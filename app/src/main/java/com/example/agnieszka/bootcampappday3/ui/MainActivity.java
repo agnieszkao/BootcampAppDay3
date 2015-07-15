@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected List<Model> doInBackground(Void... params) {
             List<Model> users = createUsers();
-            if (DatabaseHelper.getInstance().save(users)) {
+            if (DatabaseHelper.getInstance().saveUser(users)) {
                 return users;
             }
             return null;
@@ -106,11 +106,11 @@ public class MainActivity extends AppCompatActivity {
     }
 //nie zdazylam reszty
 //    private class SaveUsersNotesTask extends AsyncTask<List<Model>, Void, UsersNotes> {
-
+//
 //        @Override
 //        protected List<Model> doInBackground(List<Model>... models) {
 //            List<Model> usersNotes = createUsersNotes((List<Model>) models[0], (List<Model>) models[1]);
-//            if (DatabaseHelper.getInstance().save(usersNotes)) {
+//            if (DatabaseHelper.getInstance().saveUsersNotes(usersNotes)) {
 //
 //                mNoteTextView.setText("Notes: " + mNotes);
 //                return usersNotes;
